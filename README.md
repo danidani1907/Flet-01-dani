@@ -1,5 +1,5 @@
 
-https://github.com/user-attachments/assets/d17c89ad-9960-42d2-b883-e3c624547749
+
 # Projetos Flet – Interface Gráfica em Python
 
 Este repositório contém diversos projetos e desafios desenvolvidos em **Python** usando a biblioteca **Flet**, permitindo criar interfaces gráficas interativas. Cada projeto demonstra conceitos diferentes de UI, manipulação de dados e lógica de programação.
@@ -139,6 +139,10 @@ implementar validação e lógica de criação de perfil.
   - Perfil com pontuação e botão de ganhar pontos.
   - Configurações com switches (modo escuro, notificações, som).
 - **Objetivo:** Praticar navegação entre páginas e gerenciamento de estado.
+
+https://github.com/user-attachments/assets/753c0c2a-6ee9-4a11-bb65-d2757d42fda4
+
+
 
 ---
 
