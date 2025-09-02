@@ -2,7 +2,7 @@ import flet as ft
 
 def main(page: ft.Page):
     page.title = "Criador de Perfil"
-    page.padding = ft.padding.only(top=40, left=20, right=20, bottom=20)
+    page.padding = ft.padding.only(top=40, left=20, right=20, bottom=20)  # Padding superior para área segura
     page.scroll = ft.ScrollMode.AUTO
 
     # Campos do formulário
@@ -18,22 +18,17 @@ def main(page: ft.Page):
             ft.dropdown.Option("Música 🎵"),
             ft.dropdown.Option("Jogos 🎮"),
             ft.dropdown.Option("Culinária 🍳"),
-            ft.dropdown.Option("Arte 🎨"),
-            ft.dropdown.Option("Viagens ✈️"),
-            ft.dropdown.Option("Fotografia 📷"),
-            ft.dropdown.Option("Tecnologia 💻"),
-            ft.dropdown.Option("Cinema 🎬"),
+            ft.dropdown.Option("Arte 🎨")
         ]
     )
 
-    # Área do perfil criado
+    # Área do perfil criado (inicialmente oculta)
     cartao_perfil = ft.Container(
         content=ft.Text("Preencha os dados acima"),
         bgcolor=ft.Colors.GREY_100,
         padding=20,
         width=350,
-        visible=False,
-        border_radius=15
+        visible=False
     )
 
     def criar_perfil(evento):
@@ -65,7 +60,7 @@ def main(page: ft.Page):
     def mostrar_erro(mensagem):
         """Mostra mensagem de erro"""
         cartao_perfil.content = ft.Column([
-            ft.Icon(ft.icons.ERROR, color=ft.Colors.RED, size=40),
+            ft.Icon(ft.Icons.ERROR, color=ft.Colors.RED, size=40),
             ft.Text(f"{mensagem}", color=ft.Colors.RED, text_align=ft.TextAlign.CENTER)
         ],
         horizontal_alignment=ft.CrossAxisAlignment.CENTER)
@@ -86,25 +81,24 @@ def main(page: ft.Page):
             cor_icone = ft.Colors.BLUE
         else:
             categoria = "Experiente"
-            cor_icone = ft.Colors.DEEP_PURPLE
+            cor_icone = ft.Colors.PURPLE
 
         cartao_perfil.content = ft.Column([
-            ft.Icon(ft.icons.PERSON, size=60, color=cor_icone),
+            ft.Icon(ft.Icons.PERSON, size=60, color=cor_icone),
             ft.Text(campo_nome.value, size=20, weight=ft.FontWeight.BOLD),
             ft.Text(f"{idade} anos ({categoria})", size=14, color=ft.Colors.GREY_600),
             ft.Text(f"Hobby: {dropdown_hobby.value}", size=14),
             ft.Container(
-                content=ft.Text("Perfil criado! 🎉", color=ft.Colors.WHITE, text_align=ft.TextAlign.CENTER),
+                content=ft.Text("Perfil criado! 🎉", color=ft.Colors.WHITE),
                 bgcolor=cor_icone,
                 padding=10,
-                border_radius=20,
-                width=200
+                border_radius=20
             )
         ],
         horizontal_alignment=ft.CrossAxisAlignment.CENTER,
         spacing=10)
 
-        cartao_perfil.bgcolor = ft.Colors.GREY_50
+        cartao_perfil.bgcolor = ft.Colors.WHITE
         cartao_perfil.visible = True
         page.update()
 
@@ -121,15 +115,15 @@ def main(page: ft.Page):
         ft.ElevatedButton(
             "Criar Perfil",
             on_click=criar_perfil,
-            bgcolor=ft.Colors.INDIGO,
+            bgcolor=ft.Colors.BLUE,
             color=ft.Colors.WHITE,
             width=140
         ),
         ft.ElevatedButton(
             "Limpar",
             on_click=limpar_campos,
-            bgcolor=ft.Colors.AMBER,
-            color=ft.Colors.BLACK,
+            bgcolor=ft.Colors.GREY,
+            color=ft.Colors.WHITE,
             width=140
         ),
     ], alignment=ft.MainAxisAlignment.CENTER, spacing=20)

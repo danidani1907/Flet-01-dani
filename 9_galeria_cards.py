@@ -1,9 +1,9 @@
 # Importa a biblioteca Flet para criar interfaces gráficas
 import flet as ft
 
-def criar_card_animal(nome, emoji, descricao, cor):
+def criar_card_filme(nome, emoji, descricao, cor):
     """
-    Função que cria um card (cartão) visual para cada animal.
+    Função que cria um card (cartão) visual para filmes.
     """
     return ft.Container(
         content=ft.Column([
@@ -37,78 +37,21 @@ def main(page: ft.Page):
     """
     
     # Configurações básicas da página/janela
-    page.title = "Galeria com Filtros"  # Título que aparece na aba do navegador
+    page.title = "Galeria com Filmes"  # Título que aparece na aba do navegador
     page.padding = ft.padding.only(top=40, left=20, right=20, bottom=20)  # Margem interna da página
     page.scroll = ft.ScrollMode.AUTO  # Permite rolagem quando o conteúdo não cabe na tela
     
     # Lista com todos os dados dos animais
     # Cada animal é um dicionário (como uma ficha) com suas características
-    animais = [
-        {
-            "nome": "Gato", 
-            "emoji": "🐱", 
-            "descricao": "Felino carinhoso", 
-            "cor": ft.Colors.ORANGE_400, 
-            "categoria": "Doméstico", 
-            "tamanho": "Médio"
-        },
-        {
-            "nome": "Cachorro", 
-            "emoji": "🐶", 
-            "descricao": "Melhor amigo", 
-            "cor": ft.Colors.BROWN_400, 
-            "categoria": "Doméstico", 
-            "tamanho": "Grande"
-        },
-        {
-            "nome": "Peixe", 
-            "emoji": "🐟", 
-            "descricao": "Animal aquático", 
-            "cor": ft.Colors.BLUE_400, 
-            "categoria": "Aquático", 
-            "tamanho": "Pequeno"
-        },
-        {
-            "nome": "Pássaro", 
-            "emoji": "🐦", 
-            "descricao": "Voa livremente", 
-            "cor": ft.Colors.GREEN_400, 
-            "categoria": "Selvagem", 
-            "tamanho": "Pequeno"
-        },
-        {
-            "nome": "Coelho", 
-            "emoji": "🐰", 
-            "descricao": "Saltita pelos campos", 
-            "cor": ft.Colors.PINK_400, 
-            "categoria": "Doméstico", 
-            "tamanho": "Pequeno"
-        },
-        {
-            "nome": "Leão", 
-            "emoji": "🦁", 
-            "descricao": "Rei da selva", 
-            "cor": ft.Colors.YELLOW_700, 
-            "categoria": "Selvagem", 
-            "tamanho": "Grande"
-        },
-        {
-            "nome": "Elefante", 
-            "emoji": "🐘", 
-            "descricao": "Gigante gentil", 
-            "cor": ft.Colors.GREY_600, 
-            "categoria": "Selvagem", 
-            "tamanho": "Grande"
-        },
-        {
-            "nome": "Golfinho", 
-            "emoji": "🐬", 
-            "descricao": "Mamífero marinho", 
-            "cor": ft.Colors.CYAN_400, 
-            "categoria": "Aquático", 
-            "tamanho": "Grande"
-        }
-    ]
+    Filmes = [
+       
+    {"nome": "Matrix", "emoji": "🕶️", "descricao": "Ficção científica clássica", "cor": ft.Colors.BLUE_400, "categoria": "Sci-Fi", "tamanho": "Longo"},
+    {"nome": "Toy Story", "emoji": "🤠", "descricao": "Animação divertida", "cor": ft.Colors.ORANGE_300, "categoria": "Animação", "tamanho": "Curto"},
+    {"nome": "O Poderoso Chefão", "emoji": "👑", "descricao": "Drama policial", "cor": ft.Colors.BROWN_400, "categoria": "Drama", "tamanho": "Longo"},
+    {"nome": "Vingadores", "emoji": "🦸", "descricao": "Super-heróis unidos", "cor": ft.Colors.RED_400, "categoria": "Ação", "tamanho": "Longo"}
+]
+
+  
     
     # Criação dos elementos visuais da interface
     
@@ -129,9 +72,10 @@ def main(page: ft.Page):
         value="Todos",      # Valor selecionado inicialmente
         options=[           # Lista de opções disponíveis
             ft.dropdown.Option("Todos"), 
-            ft.dropdown.Option("Doméstico"), 
-            ft.dropdown.Option("Selvagem"), 
-            ft.dropdown.Option("Aquático")
+            ft.dropdown.Option("Ação"), 
+            ft.dropdown.Option("Comédia"), 
+            ft.dropdown.Option("drama"), 
+            ft.dropdown.Option("Sci-Fi"),
         ]
     )
     
@@ -141,10 +85,9 @@ def main(page: ft.Page):
         width=150, 
         value="Todos",
         options=[
-            ft.dropdown.Option("Todos"), 
-            ft.dropdown.Option("Pequeno"), 
+            ft.dropdown.Option("curto"), 
             ft.dropdown.Option("Médio"), 
-            ft.dropdown.Option("Grande")
+            ft.dropdown.Option("longo")
         ]
     )
     
@@ -179,35 +122,35 @@ def main(page: ft.Page):
         tamanho = filtro_tamanho.value
         busca = (campo_busca.value or "").lower()  # Converte para minúscula para comparar melhor
         
-        # Filtra os animais usando list comprehension (uma forma compacta de filtrar listas)
-        # Para cada animal 'a' na lista 'animais', inclui apenas se:
-        filtrados = [a for a in animais 
-                    if (categoria == "Todos" or a["categoria"] == categoria) and      # Categoria bate OU é "Todos"
-                       (tamanho == "Todos" or a["tamanho"] == tamanho) and          # Tamanho bate OU é "Todos"
-                       (not busca or busca in a["nome"].lower())]                   # Não há busca OU nome contém o texto buscado
+        # Filtra os filmes usando list comprehension (uma forma compacta de filtrar listas)
+        # Para cada filme 'f' na lista 'Filmes', inclui apenas se:
+        filtrados = [f for f in Filmes
+                    if (categoria == "Todos" or f["categoria"] == categoria) and      # Categoria bate OU é "Todos"
+                       (tamanho == "Todos" or f["tamanho"] == tamanho) and          # Tamanho bate OU é "Todos"
+                       (not busca or busca in f["nome"].lower())]                   # Não há busca OU nome contém o texto buscado
         
         # Para cada animal que passou pelos filtros, cria um card e adiciona na grade
-        for animal in filtrados:
+        for Filme in filtrados:
             # Chama a função que criamos lá em cima para fazer o card
-            card_do_animal = criar_card_animal(
-                animal["nome"], 
-                animal["emoji"], 
-                animal["descricao"], 
-                animal["cor"]
+            card_do_filme = criar_card_filme(
+                Filme["nome"], 
+                Filme["emoji"], 
+                Filme["descricao"], 
+                Filme["cor"]
             )
             # Adiciona o card na área de exibição
-            area_cards.controls.append(card_do_animal)
+            area_cards.controls.append(card_do_filme)
         
         # Atualiza o contador mostrando quantos animais estão visíveis
         total_filtrados = len(filtrados)  # Quantos animais passaram pelos filtros
-        total_geral = len(animais)        # Total de animais no sistema
+        total_geral = len(Filmes)        # Total de animais no sistema
         
         if total_filtrados == total_geral:
             # Se está mostrando todos, escreve uma mensagem
-            contador.value = f"Mostrando todos os {total_filtrados} animais"
+            contador.value = f"Mostrando todos os {total_filtrados} filmes"
         else:
             # Se está filtrado, mostra quantos foram encontrados
-            contador.value = f"Encontrados {total_filtrados} de {total_geral} animais"
+            contador.value = f"Encontrados {total_filtrados} de {total_geral} filmes"
         
         # Atualiza a tela para mostrar as mudanças
         page.update()
@@ -239,7 +182,7 @@ def main(page: ft.Page):
             
             # Título principal do app
             ft.Text(
-                "🦁 Zoológico Virtual", 
+                "🎬 Galeria de Filmes", 
                 size=24, 
                 weight=ft.FontWeight.BOLD, 
                 text_align=ft.TextAlign.CENTER
@@ -247,7 +190,7 @@ def main(page: ft.Page):
             
             # Subtítulo explicativo
             ft.Text(
-                "Explore diferentes categorias de animais", 
+                "Explore diferentes categorias de Filmes📽️", 
                 size=14, 
                 color=ft.Colors.GREY_600, 
                 text_align=ft.TextAlign.CENTER

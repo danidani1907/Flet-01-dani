@@ -8,7 +8,7 @@ def main(page: ft.Page):
 
     # Título
     titulo = ft.Text(
-        "Deixando organizado! 📐",
+       "Deixando organizado! 📐",
         size=24,
         weight=ft.FontWeight.BOLD,
         text_align=ft.TextAlign.CENTER
